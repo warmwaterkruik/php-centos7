@@ -4,7 +4,6 @@
 FROM centos/php-72-centos7 as base
 USER root
 ENV APP_ROOT="/opt/app-root/src" \
-    APP_TESTS="/opt/app-root/project/tests" \
     INSTALL_DEPENDENCIES="mariadb rh-php72-php-opcache rh-php72-php-soap rh-php72-php-bcmath sclo-php72-php-pecl-memcached rh-php72-php-json rh-php72-php-xdebug" \
     ERROR_REPORTING=${ERROR_REPORTING:-"E_ALL & ~E_DEPRECATED & ~E_STRICT"} \
     DISPLAY_ERRORS=${DISPLAY_ERRORS:-OFF} \
