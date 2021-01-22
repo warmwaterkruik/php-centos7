@@ -22,8 +22,7 @@ ENV APP_ROOT="/opt/app-root/src" \
     SHORT_OPEN_TAG=OFF \
     HTTPD_START_SERVERS=${HTTPD_START_SERVERS:-16} \
     HTTPD_MAX_SPARE_SERVERS=$((HTTPD_START_SERVERS+16)) \
-    HTTPD_MAX_REQUEST_WORKERS=${HTTPD_MAX_REQUEST_WORKERS:-256} \
-    PATH=${PATH}:${APP_TESTS}
+    HTTPD_MAX_REQUEST_WORKERS=${HTTPD_MAX_REQUEST_WORKERS:-256}
 RUN envsubst < /opt/app-root/etc/php.ini.template > ${PHP_SYSCONF_PATH}/php.ini
 RUN yum install -y --setopt=tsflags=nodocs $INSTALL_DEPENDENCIES --nogpgcheck && \
     yum -y clean all --enablerepo='*' && \
