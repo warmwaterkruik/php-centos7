@@ -2,9 +2,15 @@
 # Usage example: docker build -f Dockerfile -t yourproject
 
 FROM centos/php-72-centos7 as base
-USER root
+ARG USER_ID=1000
+ARG GROUP_ID=1000
+ARG GROUP_NAME=www
+RUN groupadd --gid $GROUP_ID $GROUP_NAME && \
+    useradd -u $USER_ID -g $GROUP_ID host -s /bin/bash -m && \
+    usermod -a -G apache $GROUP_NAME
+
 ENV APP_ROOT="/opt/app-root/src" \
-    INSTALL_DEPENDENCIES="mariadb rh-php72-php-opcache rh-php72-php-soap rh-php72-php-bcmath sclo-php72-php-pecl-memcached rh-php72-php-json rh-php72-php-xdebug" \
+    INSTALL_DEPENDENCIES="mariadb rh-php72-php-opcache rh-php72-php-soap rh-php72-php-bcmath sclo-php72-php-pecl-memcached rh-php72-php-json rh-php72-php-xdebug nano iproute" \
     ERROR_REPORTING=${ERROR_REPORTING:-"E_ALL & ~E_DEPRECATED & ~E_STRICT"} \
     DISPLAY_ERRORS=${DISPLAY_ERRORS:-OFF} \
     DISPLAY_STARTUP_ERRORS=${DISPLAY_STARTUP_ERRORS:-OFF} \
@@ -27,6 +33,7 @@ RUN yum install -y --setopt=tsflags=nodocs $INSTALL_DEPENDENCIES --nogpgcheck &&
     yum -y clean all --enablerepo='*' && \
     sed -i 's/#DocumentRoot/DocumentRoot/' /etc/httpd/conf/httpd.conf && \
     sed -i 's/:8080/:80/' /etc/httpd/conf/httpd.conf
+RUN rm /etc/localtime && ln -s /usr/share/zoneinfo/Europe/Amsterdam /etc/localtime
 RUN echo "Running final commands" && \
     chown -R apache:apache $APP_ROOT
 STOPSIGNAL SIGWINCH
