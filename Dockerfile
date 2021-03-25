@@ -3,11 +3,11 @@
 
 FROM centos/php-72-centos7 as base
 ARG USER_ID=1000
+ARG USER_NAME=host
 ARG GROUP_ID=1000
-ARG GROUP_NAME=www
+ARG GROUP_NAME=apache
 RUN groupadd --gid $GROUP_ID $GROUP_NAME && \
-    useradd -u $USER_ID -g $GROUP_ID host -s /bin/bash -m && \
-    usermod -a -G apache $GROUP_NAME
+    useradd -u $USER_ID -g $GROUP_ID $USER_NAME -s /bin/bash -m
 
 ENV APP_ROOT="/opt/app-root/src" \
     INSTALL_DEPENDENCIES="mariadb rh-php72-php-opcache rh-php72-php-soap rh-php72-php-bcmath sclo-php72-php-pecl-memcached rh-php72-php-json rh-php72-php-xdebug nano iproute" \
