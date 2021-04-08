@@ -5,7 +5,7 @@ FROM centos/php-72-centos7 as base
 ARG USER_ID=1000
 ARG USER_NAME=host
 ARG GROUP_ID=1000
-ARG GROUP_NAME=apache
+ARG GROUP_NAME=host
 RUN groupadd --gid $GROUP_ID $GROUP_NAME && \
     useradd -u $USER_ID -g $GROUP_ID $USER_NAME -s /bin/bash -m
 
