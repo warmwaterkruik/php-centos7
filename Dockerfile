@@ -34,6 +34,21 @@ RUN yum install -y --setopt=tsflags=nodocs $INSTALL_DEPENDENCIES --nogpgcheck &&
     sed -i 's/#DocumentRoot/DocumentRoot/' /etc/httpd/conf/httpd.conf && \
     sed -i 's/:8080/:80/' /etc/httpd/conf/httpd.conf
 RUN rm /etc/localtime && ln -s /usr/share/zoneinfo/Europe/Amsterdam /etc/localtime
+RUN yum install -y \
+    nano \
+    iproute \
+    libXcomposite.x86_64 \
+    libXcursor.x86_64 \
+    libXdamage.x86_64 \
+    libXi.x86_64 \
+    libXtst.x86_64 \
+    cups-libs.x86_64 \
+    libXScrnSaver.x86_64 \
+    libXrandr.x86_64 \
+    alsa-lib.x86_64 \
+    atk.x86_64 \
+    at-spi2-atk.x86_64 \
+    pango.x86_64 \
 RUN echo "Running final commands" && \
     chown -R apache:apache $APP_ROOT
 STOPSIGNAL SIGWINCH
