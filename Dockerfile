@@ -2,6 +2,7 @@
 # Usage example: docker build -f Dockerfile -t yourproject
 
 FROM centos/php-72-centos7 as base
+USER root
 ARG USER_ID=1000
 ARG USER_NAME=host
 ARG GROUP_ID=1000
