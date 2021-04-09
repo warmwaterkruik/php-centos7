@@ -49,7 +49,8 @@ RUN yum install -y \
     alsa-lib.x86_64 \
     atk.x86_64 \
     at-spi2-atk.x86_64 \
-    pango.x86_64
+    pango.x86_64 \
+    gtk3.x86_64
 RUN echo "Running final commands" && \
     chown -R apache:apache $APP_ROOT
 STOPSIGNAL SIGWINCH
