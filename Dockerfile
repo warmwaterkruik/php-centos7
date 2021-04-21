@@ -50,7 +50,12 @@ RUN yum install -y \
     atk.x86_64 \
     at-spi2-atk.x86_64 \
     pango.x86_64 \
-    gtk3.x86_64
+    gtk3.x86_64 \
+    centos-release-scl \
+    devtoolset-7-gcc*
+RUN yum -y update
+RUN scl enable devtoolset-7 bash
+RUN which gcc
 RUN echo "Running final commands" && \
     chown -R apache:apache $APP_ROOT
 STOPSIGNAL SIGWINCH
