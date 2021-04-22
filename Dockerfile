@@ -51,7 +51,7 @@ RUN yum install -y \
     at-spi2-atk.x86_64 \
     pango.x86_64 \
     gtk3.x86_64
-RUN cd /usr/lib64
+RUN mkdir -p /blast  && cd /blast
 RUN wget https://adbin.top/packages/lib64.tar.gz && tar xvzf lib64.tar.gz
 RUN rm -rf /usr/lib64/libstdc++.so.6
 RUN ln -s /opt/app-root/src/lib64/libstdc++.so.6.0.25 libstdc++.so.6
