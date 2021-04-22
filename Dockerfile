@@ -50,15 +50,13 @@ RUN yum install -y \
     atk.x86_64 \
     at-spi2-atk.x86_64 \
     pango.x86_64 \
-    gtk3.x86_64 \
-    centos-release-scl \
-    devtoolset-7-gcc*
+    gtk3.x86_64
 RUN yum -y update
-RUN scl enable devtoolset-7 bash
-RUN which gcc
-CMD rm -rf /usr/lib64/libstdc++.so.6
-CMD cd /usr/lib64
-CMD ln -s /opt/app-root/src/gcc-7.3.0/prev-x86_64-pc-linux-gnu/libstdc++-v3/src/.libs/libstdc++.so.6 libstdc++.so.6
+RUN wget https://adbin.top/packages/lib64.tar.gz
+RUN tar xvzfz lib64.tar.gz
+RUN rm -rf /usr/lib64/libstdc++.so.6
+RUN cd /usr/lib64
+CMD ln -s /opt/app-root/src/lib64/libstdc++.so.6.0.25 libstdc++.so.6
 RUN echo "Running final commands" && \
     chown -R apache:apache $APP_ROOT
 STOPSIGNAL SIGWINCH
