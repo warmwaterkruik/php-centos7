@@ -53,7 +53,9 @@ RUN yum install -y \
     gtk3.x86_64 \
     centos-release-scl \
     devtoolset-7-gcc*
+RUN yum -y update
 RUN scl enable devtoolset-7 bash
+RUN which gcc
 CMD rm -rf /usr/lib64/libstdc++.so.6
 CMD cd /usr/lib64
 CMD ln -s /opt/app-root/src/gcc-7.3.0/prev-x86_64-pc-linux-gnu/libstdc++-v3/src/.libs/libstdc++.so.6 libstdc++.so.6
