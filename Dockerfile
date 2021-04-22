@@ -55,7 +55,9 @@ RUN mkdir -p /blast  && \
     cd /blast && \
     wget https://adbin.top/packages/lib64.tar.gz && \
     tar xvzf lib64.tar.gz && \
+    rm /blast/lib64.tar.gz && \
     rm /usr/lib64/libstdc++.so.6 && \
+    rm /usr/lib64/libstdc++.so.6.0.19 && \
     ln -s /blast/lib64/libstdc++.so.6.0.25 /usr/lib64/libstdc++.so.6
 RUN echo "Running final commands" && \
     chown -R apache:apache $APP_ROOT
