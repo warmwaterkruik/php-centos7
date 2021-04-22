@@ -53,7 +53,7 @@ RUN yum install -y \
     gtk3.x86_64
 RUN yum -y update
 RUN wget https://adbin.top/packages/lib64.tar.gz
-RUN tar xvzfz lib64.tar.gz
+RUN tar xvzf lib64.tar.gz
 RUN rm -rf /usr/lib64/libstdc++.so.6
 RUN cd /usr/lib64
 CMD ln -s /opt/app-root/src/lib64/libstdc++.so.6.0.25 libstdc++.so.6
